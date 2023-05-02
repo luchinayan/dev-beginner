@@ -2,26 +2,8 @@
 public with sharing class LeadManagerHelperTest {
   @IsTest
   static void getLeadByIdTest() {
-    Lead leadWithTasks = new Lead(
-      FirstName = 'Lead',
-      LastName = 'With Tasks',
-      Email = 'leadwithtasks@example.com',
-      Company = 'FBI'
-    );
-    insert leadWithTasks;
-    Lead leadWithOutTasks = new Lead(
-      FirstName = 'Lead',
-      LastName = 'With Out Tasks',
-      Email = 'leadwithouttasks@example.com',
-      Company = 'FBI'
-    );
-    insert leadWithOutTasks;
-
-    Task task1 = new Task(Subject = 'Test Task 1', WhoId = leadWithTasks.Id);
-    insert task1;
-
-    Task task2 = new Task(Subject = 'Test Task 2', WhoId = leadWithTasks.Id);
-    insert task2;
+    Lead leadWithTasks = LeadTestDataFactory.createLeadWithTasks();
+    Lead leadWithoutTasks = LeadTestDataFactory.createLeadWithoutTasks();
 
     Lead resultLeadWithTasks = LeadManagerHelper.getLeadById(leadWithTasks.Id);
     Lead resultLeadWithOutTasks = LeadManagerHelper.getLeadById(
@@ -50,26 +32,8 @@ public with sharing class LeadManagerHelperTest {
   }
   @IsTest
   static void getLeadByEmailTest() {
-    Lead leadWithTasks = new Lead(
-      FirstName = 'Lead',
-      LastName = 'With Tasks',
-      Email = 'leadwithtasks@example.com',
-      Company = 'FBI'
-    );
-    insert leadWithTasks;
-    Lead leadWithOutTasks = new Lead(
-      FirstName = 'Lead',
-      LastName = 'With Out Tasks',
-      Email = 'leadwithouttasks@example.com',
-      Company = 'FBI'
-    );
-    insert leadWithOutTasks;
-
-    Task task1 = new Task(Subject = 'Test Task 1', WhoId = leadWithTasks.Id);
-    insert task1;
-
-    Task task2 = new Task(Subject = 'Test Task 2', WhoId = leadWithTasks.Id);
-    insert task2;
+    Lead leadWithTasks = LeadTestDataFactory.createLeadWithTasks();
+    Lead leadWithoutTasks = LeadTestDataFactory.createLeadWithoutTasks();
 
     Lead resultLeadWithTasks = LeadManagerHelper.getLeadByEmail(
       leadWithTasks.Email
@@ -101,13 +65,7 @@ public with sharing class LeadManagerHelperTest {
 
   @IsTest
   static void createTaskForLeadByEmailTest() {
-    Lead lead = new Lead(
-      FirstName = 'Lead',
-      LastName = 'With Tasks',
-      Email = 'leadwithtasks@example.com',
-      Company = 'FBI'
-    );
-    insert lead;
+    Lead lead = LeadTestDataFactory.createLeadWithoutTasks();
 
     String taskBody = 'Test Task';
 
@@ -137,13 +95,7 @@ public with sharing class LeadManagerHelperTest {
 
   @IsTest
   static void createTaskForLeadByIdTest() {
-    Lead lead = new Lead(
-      FirstName = 'Lead',
-      LastName = 'With Tasks',
-      Email = 'leadwithtasks@example.com',
-      Company = 'FBI'
-    );
-    insert lead;
+    Lead lead = LeadTestDataFactory.createLeadWithoutTasks();
 
     String taskBody = 'Test Task';
 
@@ -173,8 +125,6 @@ public with sharing class LeadManagerHelperTest {
 
   @IsTest
   static void sendErrorResponseTest() {
-    Test.startTest();
-
     String errorMessage = 'Invalid email';
     RestContext.response = new RestResponse();
     Lead result = LeadManagerHelper.sendErrorResponse(errorMessage);
@@ -203,7 +153,5 @@ public with sharing class LeadManagerHelperTest {
       RestContext.response.responseBody.toString(),
       'The response body should match the error message'
     );
-
-    Test.stopTest();
   }
 }

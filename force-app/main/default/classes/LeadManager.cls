@@ -2,8 +2,8 @@
 global with sharing class LeadManager {
   @HttpGet
   global static Lead getLead() {
-    String email;
-    String id;
+    String email = null;
+    String id = null;
     RestRequest request = RestContext.request;
     if (request.requestURI.contains('/Email/')) {
       email = request.requestURI.substring(

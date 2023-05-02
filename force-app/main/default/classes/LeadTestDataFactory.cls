@@ -15,7 +15,7 @@ public class LeadTestDataFactory {
     return lead;
   }
 
-  public static Lead createLeadWithoutTasks() {
+  public static Lead createLead() {
     Lead lead = new Lead(
       FirstName = 'Lead',
       LastName = 'Without Tasks',

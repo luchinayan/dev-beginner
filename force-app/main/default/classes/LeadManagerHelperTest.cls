@@ -3,7 +3,7 @@ public with sharing class LeadManagerHelperTest {
   @IsTest
   static void getLeadByIdTest() {
     Lead leadWithTasks = LeadTestDataFactory.createLeadWithTasks();
-    Lead leadWithoutTasks = LeadTestDataFactory.createLeadWithoutTasks();
+    Lead leadWithoutTasks = LeadTestDataFactory.createLead();
 
     Lead resultLeadWithTasks = LeadManagerHelper.getLeadById(leadWithTasks.Id);
     Lead resultLeadWithOutTasks = LeadManagerHelper.getLeadById(
@@ -33,7 +33,7 @@ public with sharing class LeadManagerHelperTest {
   @IsTest
   static void getLeadByEmailTest() {
     Lead leadWithTasks = LeadTestDataFactory.createLeadWithTasks();
-    Lead leadWithoutTasks = LeadTestDataFactory.createLeadWithoutTasks();
+    Lead leadWithoutTasks = LeadTestDataFactory.createLead();
 
     Lead resultLeadWithTasks = LeadManagerHelper.getLeadByEmail(
       leadWithTasks.Email
@@ -65,7 +65,7 @@ public with sharing class LeadManagerHelperTest {
 
   @IsTest
   static void createTaskForLeadByEmailTest() {
-    Lead lead = LeadTestDataFactory.createLeadWithoutTasks();
+    Lead lead = LeadTestDataFactory.createLead();
 
     String taskBody = 'Test Task';
 
@@ -95,7 +95,7 @@ public with sharing class LeadManagerHelperTest {
 
   @IsTest
   static void createTaskForLeadByIdTest() {
-    Lead lead = LeadTestDataFactory.createLeadWithoutTasks();
+    Lead lead = LeadTestDataFactory.createLead();
 
     String taskBody = 'Test Task';
 

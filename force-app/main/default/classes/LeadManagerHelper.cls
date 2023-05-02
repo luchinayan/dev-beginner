@@ -21,7 +21,8 @@ public with sharing class LeadManagerHelper {
     Lead lead = [
       SELECT
         Id,
-        Name,
+        FirstName,
+        LastName,
         Status,
         OwnerId,
         Email,
